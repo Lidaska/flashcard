@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flash Card Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .flashcard {
+      width: 300px;
+      height: 200px;
+      perspective: 1000px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+      cursor: pointer;
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #333;
+      border-radius: 10px;
+      background-color: white;
+      font-size: 18px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      background-color: #e0f7fa;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Flash Cards: Web Development</h1>
+
+  <div class="flashcard" onclick="flipCard(this)">
+    <div class="card">
+      <div class="front">What is HTML?</div>
+      <div class="back">HTML stands for HyperText Markup Language.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="flipCard(this)">
+    <div class="card">
+      <div class="front">What does CSS do?</div>
+      <div class="back">CSS is used to style HTML elements.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="flipCard(this)">
+    <div class="card">
+      <div class="front">What is JavaScript?</div>
+      <div class="back">JavaScript adds interactivity to websites.</div>
+    </div>
+  </div>
+
+  <div class="footer">Roll No: 51001 | Stream: FYBSc AI</div>
+
+  <script>
+    function flipCard(cardElement) {
+      const card = cardElement.querySelector('.card');
+      card.classList.toggle('flipped');
+    }
+  </script>
+</body>
+</html>
