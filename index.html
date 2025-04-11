@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Flash Card Project</title>
+  <title>Alphabet Flash Cards</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -9,9 +9,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+      padding: 40px;
     }
 
     h1 {
@@ -19,11 +17,18 @@
       color: #333;
     }
 
+    .cards-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
     .flashcard {
-      width: 300px;
-      height: 200px;
+      width: 100px;
+      height: 130px;
       perspective: 1000px;
-      margin-bottom: 20px;
+      cursor: pointer;
     }
 
     .card {
@@ -32,7 +37,10 @@
       position: relative;
       transform-style: preserve-3d;
       transition: transform 0.6s;
-      cursor: pointer;
+    }
+
+    .flashcard.flipped .card {
+      transform: rotateY(180deg);
     }
 
     .front, .back {
@@ -46,58 +54,54 @@
       border: 2px solid #333;
       border-radius: 10px;
       background-color: white;
-      font-size: 18px;
-      padding: 20px;
+      font-size: 28px;
+      padding: 10px;
       box-sizing: border-box;
     }
 
     .back {
       transform: rotateY(180deg);
-      background-color: #e0f7fa;
-    }
-
-    .card.flipped {
-      transform: rotateY(180deg);
+      background-color: #dcedc8;
     }
 
     .footer {
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 14px;
       color: #555;
     }
   </style>
 </head>
 <body>
-  <h1>Flash Cards: Web Development</h1>
-
-  <div class="flashcard" onclick="flipCard(this)">
-    <div class="card">
-      <div class="front">What is HTML?</div>
-      <div class="back">HTML stands for HyperText Markup Language.</div>
-    </div>
-  </div>
-
-  <div class="flashcard" onclick="flipCard(this)">
-    <div class="card">
-      <div class="front">What does CSS do?</div>
-      <div class="back">CSS is used to style HTML elements.</div>
-    </div>
-  </div>
-
-  <div class="flashcard" onclick="flipCard(this)">
-    <div class="card">
-      <div class="front">What is JavaScript?</div>
-      <div class="back">JavaScript adds interactivity to websites.</div>
-    </div>
-  </div>
-
-  <div class="footer">Roll No: 51001 | Stream: FYBSc AI</div>
+  <h1>Alphabet Flash Cards</h1>
+  <div class="cards-wrapper" id="cardWrapper"></div>
+  <div class="footer">Roll No: 51001 | FYBSc AI</div>
 
   <script>
-    function flipCard(cardElement) {
-      const card = cardElement.querySelector('.card');
-      card.classList.toggle('flipped');
-    }
+    const words = {
+      A: "Apple", B: "Ball", C: "Cat", D: "Dog", E: "Elephant",
+      F: "Fish", G: "Goat", H: "Hat", I: "Ice cream", J: "Jug",
+      K: "Kite", L: "Lion", M: "Monkey", N: "Nest", O: "Owl",
+      P: "Parrot", Q: "Queen", R: "Rabbit", S: "Sun", T: "Tiger",
+      U: "Umbrella", V: "Virgin", W: "Watch", X: "Xylophone", Y: "Yak", Z: "Zebra"
+    };
+
+    const wrapper = document.getElementById("cardWrapper");
+
+    Object.keys(words).forEach(letter => {
+      const cardBox = document.createElement("div");
+      cardBox.className = "flashcard";
+      cardBox.innerHTML = `
+        <div class="card">
+          <div class="front">${letter}</div>
+          <div class="back">${words[letter]}</div>
+        </div>`;
+
+      cardBox.addEventListener("click", function () {
+        this.classList.toggle("flipped");
+      });
+
+      wrapper.appendChild(cardBox);
+    });
   </script>
 </body>
 </html>
